@@ -67,6 +67,13 @@ int main(int argc, char** argv) {
 	// close
 	ier = nc_close(ncid);
 
+	// make sure each array is the same
+        float chksum = 0;
+	for (size_t i = 0; i < data.size(); ++i) {
+	  chksum += data[i];
+	}
+	std::cout << "[" << rank << "] chksum = " << chksum << '\n';
+	if (rank == 0) std::cout << "SUCCESS\n";
 
 	MPI_Finalize();
 	return 0;
